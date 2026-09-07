@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>nela</title>
+    <title>art by nela</title>
 
     <style>
         * {
@@ -105,6 +105,7 @@
             width: 100%;
             height: 180px;
             object-fit: cover;
+            cursor: pointer;
         }
 
         .product-info {
@@ -196,78 +197,295 @@
             background: white;
             color: black;
         }
+
+        /* ========================= */
+        /* تكبير الصورة وإخراجها */
+        /* ========================= */
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #000000b8;
+            z-index: 1000;
+
+            justify-content: center;
+            align-items: center;
+
+            padding: 25px;
+        }
+
+        .image-modal.show {
+            display: flex;
+        }
+
+        .image-modal img {
+            max-width: 90%;
+            max-height: 85vh;
+
+            object-fit: contain;
+
+            border-radius: 15px;
+
+            box-shadow: 0 10px 40px #00000070;
+
+            transform: scale(0.75);
+
+            transition: transform 0.25s ease;
+        }
+
+        .image-modal.show img {
+            transform: scale(1);
+        }
+
+        /* زر X */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+
+            color: white;
+            font-size: 45px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            z-index: 1001;
+        }
+
+        /* منع السكرول أثناء فتح الصورة */
+        body.image-open {
+            overflow: hidden;
+        }
     </style>
 </head>
 
 <body>
 
+    <!-- الشريط العلوي -->
     <header>
-        <div class="logo">art by nela</div>
+        <div class="logo">
+            art by nela
+        </div>
 
         <button class="theme-btn" onclick="toggleTheme()">
             🌙 mode
         </button>
     </header>
 
+
+    <!-- العنوان -->
     <section class="hero">
-        <h1>اكتشف ما تريد</h1>
-        <p>تستطيع شراء ما تحب</p>
+
+        <h1>
+            اكتشف ما تريد
+        </h1>
+
+        <p>
+            تستطيع شراء ما تحب
+        </p>
+
     </section>
 
+
+    <!-- البحث -->
     <input
         class="search"
         type="text"
         placeholder="🔎 ابحث عن منتج..."
     >
 
+
+    <!-- المنتجات -->
     <section class="products">
 
+
+        <!-- المنتج الأول -->
         <div class="product">
-            <img src="https://i.pinimg.com/1200x/e2/3d/cf/e23dcf63c481a2f5db8a7f3448db01a7.jpg">
+
+            <img
+                src="https://i.pinimg.com/1200x/e2/3d/cf/e23dcf63c481a2f5db8a7f3448db01a7.jpg"
+                onclick="openImage(this.src)"
+            >
 
             <div class="product-info">
-                <h3>لوحة جديدة </h3>
-                <div class="price">8,000 DA</div>
-                <button class="buy-btn">أريد شراء هذا</button>
+
+                <h3>
+                    حذاء رياضي
+                </h3>
+
+                <div class="price">
+                    8,000 DA
+                </div>
+
+                <button class="buy-btn">
+                    أريد شراء هذا
+                </button>
+
             </div>
+
         </div>
 
+
+        <!-- المنتج الثاني -->
         <div class="product">
-            <img src="https://i.pinimg.com/1200x/90/25/8e/90258ec1cbc4cd2b2ab6c11d77c28916.jpg">
+
+            <img
+                src="https://i.pinimg.com/1200x/90/25/8e/90258ec1cbc4cd2b2ab6c11d77c28916.jpg"
+                onclick="openImage(this.src)"
+            >
 
             <div class="product-info">
-                <h3>لوحة جديدة</h3>
-                <div class="price">5,500 DA</div>
-                <button class="buy-btn">أريد شراء هذا</button>
+
+                <h3>
+                    سماعات
+                </h3>
+
+                <div class="price">
+                    5,500 DA
+                </div>
+
+                <button class="buy-btn">
+                    أريد شراء هذا
+                </button>
+
             </div>
+
         </div>
 
+
+        <!-- المنتج الثالث -->
         <div class="product">
-            <img src="https://i.pinimg.com/736x/d6/a1/b2/d6a1b2800846a554fb7dae9cf0561f73.jpg">
+
+            <img
+                src="https://i.pinimg.com/736x/d6/a1/b2/d6a1b2800846a554fb7dae9cf0561f73.jpg"
+                onclick="openImage(this.src)"
+            >
 
             <div class="product-info">
-                <h3> لوحة جديدة</h3>
-                <div class="price">12,000 DA</div>
-                <button class="buy-btn">أريد شراء هذا</button>
+
+                <h3>
+                    ساعة ذكية
+                </h3>
+
+                <div class="price">
+                    12,000 DA
+                </div>
+
+                <button class="buy-btn">
+                    أريد شراء هذا
+                </button>
+
             </div>
+
         </div>
 
     </section>
 
+
+    <!-- زر الاتصال -->
     <a class="contact" href="contact.html">
         📞 اتصل بنا
     </a>
 
+
+    <!-- الشريط السفلي -->
     <nav class="bottom-nav">
-        <a href="#">🏠 الرئيسية</a>
-        <a href="#">🛍️ المنتجات</a>
-        <a href="#">👤 حسابي</a>
+
+        <a href="#">
+            🏠 الرئيسية
+        </a>
+
+        <a href="#">
+            🛍️ المنتجات
+        </a>
+
+        <a href="#">
+            👤 حسابي
+        </a>
+
     </nav>
 
+
+    <!-- نافذة الصورة -->
+    <div
+        id="imageModal"
+        class="image-modal"
+        onclick="closeImage()"
+    >
+
+        <span
+            class="close-btn"
+            onclick="closeImage()"
+        >
+            &times;
+        </span>
+
+        <img
+            id="modalImage"
+            src=""
+            alt="صورة المنتج"
+            onclick="event.stopPropagation()"
+        >
+
+    </div>
+
+
     <script>
+
+        /* الوضع الداكن */
         function toggleTheme() {
+
             document.body.classList.toggle("dark");
+
         }
+
+
+        /* فتح الصورة */
+        function openImage(src) {
+
+            const modal =
+                document.getElementById("imageModal");
+
+            const modalImage =
+                document.getElementById("modalImage");
+
+            modalImage.src = src;
+
+            modal.classList.add("show");
+
+            document.body.classList.add("image-open");
+
+        }
+
+
+        /* إغلاق الصورة */
+        function closeImage() {
+
+            const modal =
+                document.getElementById("imageModal");
+
+            modal.classList.remove("show");
+
+            document.body.classList.remove("image-open");
+
+        }
+
+
+        /* إغلاق بزر ESC */
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Escape") {
+
+                    closeImage();
+
+                }
+
+            }
+        );
+
     </script>
 
 </body>
