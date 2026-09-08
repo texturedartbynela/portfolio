@@ -21,7 +21,8 @@
             padding-bottom: 80px;
         }
 
-        /* الشريط العلوي */
+        /* HEADER */
+
         header {
             height: 70px;
             background: white;
@@ -49,7 +50,31 @@
             cursor: pointer;
         }
 
-        /* العنوان */
+        /* الصفحات */
+
+        .page {
+            display: none;
+            animation: pageAnimation 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes pageAnimation {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* الرئيسية */
+
         .hero {
             text-align: center;
             padding: 50px 20px 30px;
@@ -66,6 +91,7 @@
         }
 
         /* البحث */
+
         .search {
             display: block;
             width: 90%;
@@ -79,7 +105,16 @@
             font-size: 16px;
         }
 
+        /* العناوين */
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin: 40px 0 25px;
+        }
+
         /* المنتجات */
+
         .products {
             width: 90%;
             max-width: 1100px;
@@ -131,23 +166,168 @@
             color: white;
             cursor: pointer;
             font-size: 15px;
+            transition: 0.2s;
         }
 
-        /* زر الاتصال */
-        .contact {
-            display: block;
+        .buy-btn:hover {
+            transform: scale(1.02);
+        }
+
+        /* الاتصال */
+
+        .contact-box {
             width: 90%;
             max-width: 500px;
-            margin: 40px auto;
-            padding: 15px;
+            margin: 50px auto;
             text-align: center;
+        }
+
+        .contact-card {
+            background: white;
+            padding: 22px;
+            margin: 15px 0;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px #00000012;
+        }
+
+        .contact-card a {
             text-decoration: none;
-            background: #111;
+            color: #111;
+            font-weight: bold;
+        }
+
+        /* تكبير الصورة */
+
+        .image-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #000000b8;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+        }
+
+        .image-modal.show {
+            display: flex;
+        }
+
+        .image-modal img {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px #00000070;
+            transform: scale(0.75);
+            transition: transform 0.25s ease;
+        }
+
+        .image-modal.show img {
+            transform: scale(1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 25px;
             color: white;
+            font-size: 45px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        body.image-open {
+            overflow: hidden;
+        }
+
+        /* نافذة الشراء */
+
+        .buy-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #000000b8;
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .buy-modal.show {
+            display: flex;
+        }
+
+        .buy-box {
+            position: relative;
+            width: 90%;
+            max-width: 430px;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px #00000050;
+            animation: buyAnimation 0.25s ease;
+        }
+
+        @keyframes buyAnimation {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .buy-box h2 {
+            margin-bottom: 20px;
+        }
+
+        .buy-box p {
+            margin: 10px 0;
+            font-size: 17px;
+        }
+
+        .buy-box h3 {
+            margin: 25px 0 15px;
+        }
+
+        .buy-close {
+            position: absolute;
+            top: 10px;
+            right: 18px;
+            font-size: 35px;
+            cursor: pointer;
+        }
+
+        .buy-options {
+            display: flex;
+            gap: 10px;
+        }
+
+        .buy-options button {
+            flex: 1;
+            border: none;
+            padding: 14px;
             border-radius: 12px;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+        }
+
+        .instagram-btn {
+            background: #E1306C;
         }
 
         /* الشريط السفلي */
+
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -162,13 +342,21 @@
             z-index: 20;
         }
 
-        .bottom-nav a {
-            text-decoration: none;
+        .bottom-nav button {
+            border: none;
+            background: transparent;
             color: #333;
             font-size: 13px;
+            cursor: pointer;
         }
 
-        /* الوضع الداكن */
+        .bottom-nav button.active {
+            font-weight: bold;
+            transform: scale(1.08);
+        }
+
+        /* الوضع الليلي */
+
         body.dark {
             background: #111;
             color: white;
@@ -176,7 +364,9 @@
 
         body.dark header,
         body.dark .bottom-nav,
-        body.dark .product {
+        body.dark .product,
+        body.dark .contact-card,
+        body.dark .buy-box {
             background: #1c1c1c;
         }
 
@@ -189,7 +379,7 @@
             color: white;
         }
 
-        body.dark .bottom-nav a {
+        body.dark .bottom-nav button {
             color: #ddd;
         }
 
@@ -198,183 +388,334 @@
             color: black;
         }
 
-        /* ========================= */
-        /* تكبير الصورة وإخراجها */
-        /* ========================= */
-
-        .image-modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: #000000b8;
-            z-index: 1000;
-
-            justify-content: center;
-            align-items: center;
-
-            padding: 25px;
-        }
-
-        .image-modal.show {
-            display: flex;
-        }
-
-        .image-modal img {
-            max-width: 90%;
-            max-height: 85vh;
-
-            object-fit: contain;
-
-            border-radius: 15px;
-
-            box-shadow: 0 10px 40px #00000070;
-
-            transform: scale(0.75);
-
-            transition: transform 0.25s ease;
-        }
-
-        .image-modal.show img {
-            transform: scale(1);
-        }
-
-        /* زر X */
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 25px;
-
+        body.dark .contact-card a {
             color: white;
-            font-size: 45px;
-            font-weight: bold;
-
-            cursor: pointer;
-
-            z-index: 1001;
         }
 
-        /* منع السكرول أثناء فتح الصورة */
-        body.image-open {
-            overflow: hidden;
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- الشريط العلوي -->
+    <!-- HEADER -->
+
     <header>
+
         <div class="logo">
             art by nela
         </div>
 
-        <button class="theme-btn" onclick="toggleTheme()">
+        <button
+            class="theme-btn"
+            onclick="toggleTheme()">
             🌙 mode
         </button>
+
     </header>
 
 
-    <!-- العنوان -->
-    <section class="hero">
+    <!-- ================= الرئيسية ================= -->
 
-        <h1>
-            اكتشف ما تريد
-        </h1>
+    <section id="home" class="page active">
 
-        <p>
-            تستطيع شراء ما تحب
-        </p>
+        <section class="hero">
+
+            <h1>
+                اكتشف ما تريد
+            </h1>
+
+            <p>
+                تستطيع شراء ما تحب
+            </p>
+
+        </section>
+
+
+        <input
+            class="search"
+            type="text"
+            placeholder="🔎 ابحث عن منتج..."
+            oninput="searchProducts(this.value)"
+        >
+
+
+        <h2 class="section-title">
+            ⭐ منتجات مميزة
+        </h2>
+
+
+        <section class="products">
+
+            <!-- حذاء -->
+
+            <div class="product">
+
+                <img
+                    src="https://i.pinimg.com/1200x/e2/3d/cf/e23dcf63c481a2f5db8a7f3448db01a7.jpg"
+                    onclick="openImage(this.src)"
+                >
+
+                <div class="product-info">
+
+                    <h3>
+                         Beautiful art
+                    </h3>
+
+                    <div class="price">
+                        12,5000 DA
+                    </div>
+
+                    <button
+                        class="buy-btn"
+                        onclick="buyProduct('Beautiful art ', '12,500 DA')">
+                        أريد شراء هذا
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- سماعات -->
+
+            <div class="product">
+
+                <img
+                    src="https://i.pinimg.com/1200x/90/25/8e/90258ec1cbc4cd2b2ab6c11d77c28916.jpg"
+                    onclick="openImage(this.src)"
+                >
+
+                <div class="product-info">
+
+                    <h3>
+                        classic art
+                    </h3>
+
+                    <div class="price">
+                        7,500 DA
+                    </div>
+
+                    <button
+                        class="buy-btn"
+                        onclick="buyProduct('classic art', '7,500 DA')">
+                        أريد شراء هذا
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ساعة -->
+
+            <div class="product">
+
+                <img
+                    src="https://i.pinimg.com/736x/d6/a1/b2/d6a1b2800846a554fb7dae9cf0561f73.jpg"
+                    onclick="openImage(this.src)"
+                >
+
+                <div class="product-info">
+
+                    <h3>
+                        simple art 
+                    </h3>
+
+                    <div class="price">
+                        6,000 DA
+                    </div>
+
+                    <button
+                        class="buy-btn"
+                        onclick="buyProduct('simple art ', '6,000 DA')">
+                        أريد شراء هذا
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
 
     </section>
 
 
-    <!-- البحث -->
-    <input
-        class="search"
-        type="text"
-        placeholder="🔎 ابحث عن منتج..."
-    >
+    <!-- ================= المنتجات ================= -->
+
+    <section
+        id="products-page"
+        class="page">
+
+        <h2 class="section-title">
+            🛍️ جميع المنتجات
+        </h2>
 
 
-    <!-- المنتجات -->
-    <section class="products">
+        <section class="products">
 
+            <!-- حذاء -->
 
-        <!-- المنتج الأول -->
-        <div class="product">
+            <div class="product">
 
-            <img
-                src="https://i.pinimg.com/1200x/e2/3d/cf/e23dcf63c481a2f5db8a7f3448db01a7.jpg"
-                onclick="openImage(this.src)"
-            >
+                <img
+                    src="https://i.pinimg.com/1200x/e2/3d/cf/e23dcf63c481a2f5db8a7f3448db01a7.jpg"
+                    onclick="openImage(this.src)"
+                >
 
-            <div class="product-info">
+                <div class="product-info">
 
-                <h3>
-                    حذاء رياضي
-                </h3>
+                    <h3>
+                         Beautiful art
+                    </h3>
 
-                <div class="price">
-                    8,000 DA
+                    <div class="price">
+                        12,500 DA
+                    </div>
+
+                    <button
+                        class="buy-btn"
+                        onclick="buyProduct('Beautiful art ', '12,500 DA')">
+                        أريد شراء هذا
+                    </button>
+
                 </div>
-
-                <button class="buy-btn">
-                    أريد شراء هذا
-                </button>
 
             </div>
 
-        </div>
 
+            <!-- سماعات -->
 
-        <!-- المنتج الثاني -->
-        <div class="product">
+            <div class="product">
 
-            <img
-                src="https://i.pinimg.com/1200x/90/25/8e/90258ec1cbc4cd2b2ab6c11d77c28916.jpg"
-                onclick="openImage(this.src)"
-            >
+                <img
+                    src="https://i.pinimg.com/1200x/90/25/8e/90258ec1cbc4cd2b2ab6c11d77c28916.jpg"
+                    onclick="openImage(this.src)"
+                >
 
-            <div class="product-info">
+                <div class="product-info">
 
-                <h3>
-                    سماعات
-                </h3>
+                    <h3>
+                        classic art
+                    </h3>
 
-                <div class="price">
-                    5,500 DA
+                    <div class="price">
+                        7,500 DA
+                    </div>
+
+                    <button
+                        class="buy-btn"
+                        onclick="buyProduct('classic art', '7,500 DA')">
+                        أريد شراء هذا
+                    </button>
+
                 </div>
-
-                <button class="buy-btn">
-                    أريد شراء هذا
-                </button>
 
             </div>
 
-        </div>
 
+            <!-- ساعة -->
 
-        <!-- المنتج الثالث -->
-        <div class="product">
+            <div class="product">
 
-            <img
-                src="https://i.pinimg.com/736x/d6/a1/b2/d6a1b2800846a554fb7dae9cf0561f73.jpg"
-                onclick="openImage(this.src)"
-            >
+                <img
+                    src="https://i.pinimg.com/736x/d6/a1/b2/d6a1b2800846a554fb7dae9cf0561f73.jpg"
+                    onclick="openImage(this.src)"
+                >
 
-            <div class="product-info">
+                <div class="product-info">
 
-                <h3>
-                    ساعة ذكية
-                </h3>
+                    <h3>
+                         simple art
+                    </h3>
 
-                <div class="price">
-                    12,000 DA
+                    <div class="price">
+                        6,000 DA
+                    </div>
+
+                    <button
+                        class="buy-btn"
+                        onclick="buyProduct('simple art ', '6,000 DA')">
+                        أريد شراء هذا
+                    </button>
+
                 </div>
 
-                <button class="buy-btn">
-                    أريد شراء هذا
-                </button>
+            </div>
+
+
+            <!-- AMAN -->
+
+            <div class="product">
+
+                <img
+                    src="https://i.pinimg.com/1200x/e2/3d/cf/e23dcf63c481a2f5db8a7f3448db01a7.jpg"
+                    onclick="openImage(this.src)"
+                >
+
+                <div class="product-info">
+
+                    <h3>
+                        AMAN
+                    </h3>
+
+                    <div class="price">
+                        10,000 DA
+                    </div>
+
+                    <button
+                        class="buy-btn"
+                        onclick="buyProduct('AMAN', '10,000 DA')">
+                        أريد شراء هذا
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </section>
+
+
+    <!-- ================= الاتصال ================= -->
+
+    <section
+        id="contact-page"
+        class="page">
+
+        <h2 class="section-title">
+            📞 اتصل بنا
+        </h2>
+
+
+        <div class="contact-box">
+
+            <div class="contact-card">
+
+                📱 واتساب
+
+                <br><br>
+
+                <a href="https://wa.me/213672220193">
+
+                    +213 672 22 01 93
+
+                </a>
+
+            </div>
+
+
+            <div class="contact-card">
+
+                📧 البريد الإلكتروني
+
+                <br><br>
+
+                <a href="mailto:ammarimanel48@gmail.com">
+
+                    ammarimanel48@gmail.com
+
+                </a>
 
             </div>
 
@@ -383,43 +724,21 @@
     </section>
 
 
-    <!-- زر الاتصال -->
-    <a class="contact" href="contact.html">
-        📞 اتصل بنا
-    </a>
+    <!-- ================= تكبير الصورة ================= -->
 
-
-    <!-- الشريط السفلي -->
-    <nav class="bottom-nav">
-
-        <a href="#">
-            🏠 الرئيسية
-        </a>
-
-        <a href="#">
-            🛍️ المنتجات
-        </a>
-
-        <a href="#">
-            👤 حسابي
-        </a>
-
-    </nav>
-
-
-    <!-- نافذة الصورة -->
     <div
         id="imageModal"
         class="image-modal"
-        onclick="closeImage()"
-    >
+        onclick="closeImage()">
 
         <span
             class="close-btn"
-            onclick="closeImage()"
-        >
+            onclick="closeImage()">
+
             &times;
+
         </span>
+
 
         <img
             id="modalImage"
@@ -431,9 +750,152 @@
     </div>
 
 
+    <!-- ================= نافذة الشراء ================= -->
+
+    <div
+        id="buyModal"
+        class="buy-modal"
+        onclick="closeBuy(event)">
+
+        <div
+            class="buy-box"
+            onclick="event.stopPropagation()">
+
+            <span
+                class="buy-close"
+                onclick="closeBuy()">
+
+                &times;
+
+            </span>
+
+
+            <h2>
+                🛍️ تأكيد الطلب
+            </h2>
+
+
+            <p id="productName">
+            </p>
+
+
+            <p id="productPrice">
+            </p>
+
+
+            <h3>
+                اختر طريقة التواصل:
+            </h3>
+
+
+            <div class="buy-options">
+
+                <button
+                    class="whatsapp-btn"
+                    onclick="sendWhatsApp()">
+
+                    🟢 WhatsApp
+
+                </button>
+
+
+                <button
+                    class="instagram-btn"
+                    onclick="sendInstagram()">
+
+                    📸 Instagram
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= الشريط السفلي ================= -->
+
+    <nav class="bottom-nav">
+
+        <button
+            class="active"
+            onclick="showPage('home', this)">
+
+            🏠 الرئيسية
+
+        </button>
+
+
+        <button
+            onclick="showPage('products-page', this)">
+
+            🛍️ المنتجات
+
+        </button>
+
+
+        <button
+            onclick="showPage('contact-page', this)">
+
+            📞 اتصال
+
+        </button>
+
+    </nav>
+
+
     <script>
 
-        /* الوضع الداكن */
+        let selectedProduct = "";
+
+        let selectedPrice = "";
+
+
+        /* تغيير الصفحة */
+
+        function showPage(pageId, button) {
+
+            const pages =
+                document.querySelectorAll(".page");
+
+            pages.forEach(function(page) {
+
+                page.classList.remove("active");
+
+            });
+
+
+            document
+                .getElementById(pageId)
+                .classList.add("active");
+
+
+            const buttons =
+                document.querySelectorAll(
+                    ".bottom-nav button"
+                );
+
+            buttons.forEach(function(btn) {
+
+                btn.classList.remove("active");
+
+            });
+
+
+            button.classList.add("active");
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* الوضع الليلي */
+
         function toggleTheme() {
 
             document.body.classList.toggle("dark");
@@ -441,7 +903,8 @@
         }
 
 
-        /* فتح الصورة */
+        /* تكبير الصورة */
+
         function openImage(src) {
 
             const modal =
@@ -460,6 +923,7 @@
 
 
         /* إغلاق الصورة */
+
         function closeImage() {
 
             const modal =
@@ -472,7 +936,95 @@
         }
 
 
-        /* إغلاق بزر ESC */
+        /* فتح نافذة الشراء */
+
+        function buyProduct(product, price) {
+
+            selectedProduct = product;
+
+            selectedPrice = price;
+
+
+            document
+                .getElementById("productName")
+                .textContent =
+                "🛍️ المنتج: " + product;
+
+
+            document
+                .getElementById("productPrice")
+                .textContent =
+                "💰 السعر: " + price;
+
+
+            document
+                .getElementById("buyModal")
+                .classList.add("show");
+
+        }
+
+
+        /* إغلاق نافذة الشراء */
+
+        function closeBuy(event) {
+
+            if (
+                event &&
+                event.target.id !== "buyModal"
+            ) {
+                return;
+            }
+
+            document
+                .getElementById("buyModal")
+                .classList.remove("show");
+
+        }
+
+
+        /* WhatsApp */
+
+        function sendWhatsApp() {
+
+            const message =
+                "السلام عليكم، أريد شراء هذا المنتج:\n\n" +
+                "🛍️ المنتج: " +
+                selectedProduct +
+                "\n💰 السعر: " +
+                selectedPrice;
+
+
+            const whatsapp =
+                "https://wa.me/213672220193?text=" +
+                encodeURIComponent(message);
+
+
+            window.open(
+                whatsapp,
+                "_blank"
+            );
+
+        }
+
+
+        /* Instagram */
+
+        function sendInstagram() {
+
+            const instagram =
+                "https://www.instagram.com/textured_art_by_nela_dz/";
+
+
+            window.open(
+                instagram,
+                "_blank"
+            );
+
+        }
+
+
+        /* ESC */
+
         document.addEventListener(
             "keydown",
             function(event) {
@@ -481,12 +1033,53 @@
 
                     closeImage();
 
+                    closeBuy();
+
                 }
 
             }
         );
 
+
+        /* البحث */
+
+        function searchProducts(value) {
+
+            const products =
+                document.querySelectorAll(
+                    "#home .product"
+                );
+
+
+            value =
+                value.toLowerCase();
+
+
+            products.forEach(function(product) {
+
+                const name =
+                    product
+                        .querySelector("h3")
+                        .textContent
+                        .toLowerCase();
+
+
+                if (name.includes(value)) {
+
+                    product.style.display = "";
+
+                } else {
+
+                    product.style.display = "none";
+
+                }
+
+            });
+
+        }
+
     </script>
 
 </body>
+
 </html>
